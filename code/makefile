@@ -1,30 +1,38 @@
+###########################################################################
+#  Universidade Federal do Rio de Janeiro
+#  Disciplina: Sistemas Operacionais - EEL770
+#  Professor: Rodrigo Souza Couto
+#  Desenvolvedor: Chritian Marques de Oliveira Silva
+#  DRE: 117.214.742
+#  Trabalho 1: Inicialização de programas e comunicação entre processos
+###########################################################################
+
+# Compilador e linkeditor
 CC = g++
 LD = g++
 
+# Flags de compilação e linkedição
 CFLAGS = -Wall -std=c++11
 LFLAGS = -Wall -std=c++11
 
-CODE_OBJS = main.o
-
-CODE = run.exe
-
-OBJS = $(CODE_OBJS)
-EXECS = $(CODE)
+# Flags do objeto e executável a serem gerados
+OBJ = main.o
+EXEC = run
 
 #Implicit Rules
 .cpp.o:
 	$(CC) $(CFLAGS) -c $<
 
-all: $(EXECS)
+all: $(EXEC)
 
-compile: $(CODE_OBJS)
-	$(LD) $(CODE_OBJS) -o $(CODE) $(LFLAGS)
+$(EXEC): $(OBJ)
+	$(LD) $(OBJ) -o $(EXEC) $(LFLAGS)
 	make -s clean-objs
 clean:
-	rm -f $(OBJS) $(EXECS)
+	rm -f $(OBJ) $(EXEC)
 
 clean-execs:
-	rm -f $(EXECS)
+	rm -f $(EXEC)
 
 clean-objs:
-	rm -f $(OBJS)
+	rm -f $(OBJ)
